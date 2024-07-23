@@ -1,0 +1,28 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log in to Amazon ECR
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 393952290553.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Build Docker image
+        working-directory: barkuni/flask
+        run: |
+          docker buildx build --platform=linux/amd64 -t barkuni-app .
+
+      - name: Tag Docker image
+        run: |
+          docker tag barkuni-app:latest 393952290553.dkr.ecr.us-east-1.amazonaws.com/barkuni-app:arm
+
+      - name: Push Docker image
+        run: |
+          docker push 393952290553.dkr.ecr.us-east-1.amazonaws.com/barkuni-app:arm

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='../static/style.css') }}" />
+</head>
+<body>
+    <h1>Launch EC2 Instance</h1>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    <form method="post" action="{{ url_for('launch_ec2') }}">
+        <label for="subnet_id">Subnet ID:</label><br>
+        <input type="text" id="subnet_id" name="subnet_id"><br>
+        <label for="ami_id">AMI ID:</label><br>
+        <input type="text" id="ami_id" name="ami_id"><br><br>
+        <input type="submit" value="Create">
+    </form>
+</body>
+</html>

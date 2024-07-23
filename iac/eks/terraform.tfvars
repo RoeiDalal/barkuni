@@ -1,0 +1,9 @@
+aws_region       = "us-east-1"
+cluster_name     = "barkuni-cluster"
+cluster_version  = "1.30"
+vpc_id           = "vpc-74358109"
+subnet_ids       = ["subnet-56d94230", "subnet-dc2a0191","subnet-5013770f"]
+desired_capacity = 1
+max_capacity     = 2
+min_capacity     = 1
+instance_types   = ["t3.medium"]

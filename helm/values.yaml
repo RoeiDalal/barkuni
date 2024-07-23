@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: 393952290553.dkr.ecr.us-east-1.amazonaws.com/barkuni-app
+  tag: arm
+  pullPolicy: Always
+
+serviceAccount: 
+  name: barkuni-app-sa
+  iamRoleArn: arn:aws:iam::393952290553:role/LaunchInstanceRole
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/security-groups: sg-0153c8ee9ef197b32
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: 10
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/subnets: subnet-56d94230, subnet-dc2a0191, subnet-5013770f
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+  path: /*
+  pathType: ImplementationSpecific
+
+service:
+  type: ClusterIP
+  port: 80

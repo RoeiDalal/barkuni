@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='../static/style.css') }}" />
+    </head>
+    <body>
+        <h1>Kube System Pods</h1>
+        <table>
+            <thead>
+                <tr>
+                    {% for header in headers %}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
